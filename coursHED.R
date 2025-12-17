@@ -24,6 +24,9 @@ elfe[, wgt2m:= M02E_PONDREFC2]
 
 
 
+
+
+
 table(elfehed$educ3, elfehed$matleave2m)
 
 prop.table(table(elfehed$educ3, elfehed$matleave2m))
