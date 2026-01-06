@@ -36,7 +36,7 @@ ggplot(mcs_hed, aes(APCHUN00_m)) +
 
 mcs_hed <- as.data.table(mcs_hed)
 
-mcs_hed[APCHUN00_m > 0, childoutofmarriage:= APCHUN00_m]
+mcs_hed[APCHUN00_m > 0 & APCHUN00_m != 6, childoutofmarriage:= 6 - APCHUN00_m]
 
 ggplot(mcs_hed, aes(childoutofmarriage)) +
   geom_bar()
@@ -47,7 +47,7 @@ mcs_hed$childoutofmarriage <- as.factor(mcs_hed$childoutofmarriage)
 
 str(mcs_hed$childoutofmarriage)
 
-levels(mcs_hed$childoutofmarriage) <- c("Strongly agree", "Agree", "Neither agree nor disagree", "Disagree", "Strongly disagree", "Can t say")
+levels(mcs_hed$childoutofmarriage) <- rev(c("Strongly agree", "Agree", "Neither agree nor disagree", "Disagree", "Strongly disagree"))
 
 table(mcs_hed$childoutofmarriage)
 
@@ -92,7 +92,8 @@ ggplot(mcs_hed, aes(x = 1, fill = childoutofmarriage)) +
   theme(axis.ticks.y = element_blank(),
         axis.text.y = element_blank(),
         legend.position = "bottom") +
-  guides(fill = guide_legend(nrow = 2))
+  guides(fill = guide_legend(nrow = 2)) +
+  scale_fill_likert()
 
 
 
