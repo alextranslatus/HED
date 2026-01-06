@@ -186,6 +186,24 @@ mcs_hed <- mcs_hed %>%
                names_to = 'parentsex',
                values_to = 'values')
   
+mcs_hed$parentsex[mcs_hed$parentsex == "childoutofmarriage_m"] <- "Mothers"
+mcs_hed$parentsex[mcs_hed$parentsex == "childoutofmarriage_p"] <- "Fathers"
+
+ggplot(mcs_hed, aes(x = parentsex, fill = values)) +
+  geom_bar(position = "likert") +
+  coord_flip() +
+  theme_minimal() +
+  labs(title = "All right to have children without being married",
+       x = "",
+       y = "Proportion", 
+       fill = "") +
+  theme(legend.position = "bottom") +
+  guides(fill = guide_legend(nrow = 1)) +
+  scale_fill_likert()
+
+
+
+
 
 
 
